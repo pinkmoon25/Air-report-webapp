@@ -1,12 +1,18 @@
-import React from 'react'
-import './App.css'
+import React from 'react';
+import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Homepage from './components/Homepage';
+import Details from './components/Details';
 
 function App() {
   return (
-    <div>
-      <p>Clean React App</p>
-    </div>
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/details/:countryname" element={<Details />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
