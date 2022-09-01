@@ -20,7 +20,7 @@ A webApp to get Air pollution data and weather data for countries all around the
  
 ## Live Demo Link
 
-   Check it out live :point_right: [Air-Report]()
+   Check it out live :point_right: [Air-Report](https://pinkmoon25.github.io/Air-report-webapp/)
 
 ### Prerequisites
 
