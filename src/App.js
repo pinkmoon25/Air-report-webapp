@@ -1,17 +1,19 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import Homepage from './components/Homepage';
 import Details from './components/Details';
+import Header from './components/Header';
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
+      <Header />
       <Routes>
-        <Route path="/" element={<Homepage />} />
+        <Route exact path="/" element={<Homepage />} />
         <Route path="/details/:countryname" element={<Details />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

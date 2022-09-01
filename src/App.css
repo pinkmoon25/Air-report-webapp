@@ -1,31 +1,151 @@
-body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 ul {
-  margin: 0;
+  margin: 16px 0;
   padding: 0;
   list-style-type: none;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 li {
-  padding: 12px;
+  padding-bottom: 12px;
   border-radius: 5px;
   text-align: center;
-  background-color: #6495ed;
+  background-color: rgba(100, 149, 237, 0.7);
+}
+
+li:nth-child(odd) {
+  background-color: rgba(64, 126, 240, 0.5);
+}
+
+a {
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+}
+
+header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.icons {
+  display: flex;
+  gap: 28px;
+  font-size: 18px;
+}
+
+section.homepage {
+  padding: 0 6vw;
+}
+
+.select-region {
+  padding-bottom: 16px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.continent {
+  padding: 16px 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 8px;
+  background-color: rgb(100, 149, 237);
+}
+
+.map-img {
+  width: 35vw;
 }
 
 .flags-img {
-  width: 125px;
+  width: 10%;
+}
+
+.country-map {
+  width: 50%;
+}
+
+.country-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+button {
+  width: 80%;
+  padding: 8px 0;
+  font-size: 1em;
+  font-weight: 700;
+  border: none;
+  border-radius: 4px;
+  color: #0a2d6c;
+}
+
+.container {
+  margin: 0 10vw 2vw 10vw;
+  border-radius: 8px;
+  background: #6495ed;
+}
+
+.container > h2 {
+  margin: 0;
+  padding-top: 12px;
+  text-align: center;
+}
+
+.details-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.details-section > .country-map {
+  width: 35%;
+  margin-left: 8px;
+}
+
+.data {
+  padding-bottom: 16px;
+}
+
+.data > figure {
+  margin: auto;
 }
 
 .pollution-data {
-  width: 50vw;
+  width: 35vw;
+}
+
+@media screen and (max-width: 768px) {
+  ul {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  li:nth-child(odd) {
+    background-color: rgb(100, 149, 237);
+  }
+
+  li:nth-child(4n+1) {
+    background-color: rgba(64, 126, 240, 0.5);
+  }
+
+  li:nth-child(4n+4) {
+    background-color: rgba(64, 126, 240, 0.5);
+  }
+
+  .container {
+    min-height: 80vh;
+    margin: 0 12px;
+  }
+
+  .details-section {
+    justify-content: center;
+  }
+
+  .pollution-data {
+    width: 60vw;
+  }
 }
