@@ -7,9 +7,13 @@ const FETCH_AIR_REPORT = 'FETCH_AIR_REPORT';
 const FETCH_WEATHER_REPORT = 'FETCH_WEATHER_REPORT';
 
 const fetchCountries = (region) => async (dispatch) => {
-  const res = await fetch(countryBaseUrl + region);
-  const countries = await res.json();
-  dispatch({ type: FETCH_COUNTRIES, payload: countries });
+  try {
+    const res = await fetch(countryBaseUrl + region);
+    const countries = await res.json();
+    dispatch({ type: FETCH_COUNTRIES, payload: countries });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const countriesReducer = (state = [], action) => {
@@ -22,6 +26,7 @@ const fetchAirData = (lat, lon) => async (dispatch) => {
     const url = encodeURI(`${airPollutionUrl}lat=${lat}&lon=${lon}&appid=${appId}`);
     const res = await fetch(url);
     const data = await res.json();
+    console.log(data);
     dispatch({ type: FETCH_AIR_REPORT, payload: data.list });
   } catch (error) {
     console.error(error);
