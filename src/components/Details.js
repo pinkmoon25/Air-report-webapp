@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto'; //eslint-disable-line
 import { fetchAirData, fetchWeatherData } from '../redux/action-reducer';
-import { baseImageUrl, imageExtension } from '../api/api';
+import { baseImageUrl, imageExtension, countryMap } from '../api/api';
 
 const Details = () => {
   const countries = useSelector((state) => state.countries);
@@ -18,47 +18,90 @@ const Details = () => {
       if (country.name.common === countryname) {
         dispatch(fetchAirData(country.latlng[0], country.latlng[1]));
         dispatch(fetchWeatherData(country.latlng[0], country.latlng[1]));
+        console.log(airPollution);
       }
     });
   }, []);
 
-  return (
-    <section className="details-section">
-      <h2>{countryname}</h2>
-      {weather.map((item) => (
-        <figure key={item.id}>
-          <img src={baseImageUrl + item.icon + imageExtension} alt="weather icon" />
-          <figcaption>{item.description}</figcaption>
-        </figure>
-      ))}
-      {Object.values(airPollution).map((item) => (
-        <div key={item.dt} className="pollution-data">
+  const rating = (n) => {
+    switch (n) {
+      case 1:
+        return (<span>Good</span>);
+      case 2:
+        return (<span>Fair</span>);
+      case 3:
+        return (<span>Moderate</span>);
+      case 4:
+        return (<span>Poor</span>);
+      case 5:
+        return (<span>Very Poor</span>);
+      default:
+        return 'not available';
+    }
+  };
 
-          <Pie
-            type="pie"
-            data={
-            {
-              labels: ['CO', 'NO', 'NO2', 'O3', 'SO2', 'NH3', 'PM2.5', 'PM10'],
-              datasets: [
-                {
-                  data: [item.components.co, item.components.no, item.components.no2,
-                    item.components.o3, item.components.so2, item.components.nh3,
-                    item.components.pm2_5, item.components.pm10],
-                  label: 'Concentration of pollutant gases, μg/m3',
-                  backgroundColor: ['red', 'blue', 'green', 'orange',
-                    'yellow', 'purple', 'pink', 'brown'],
-                },
-              ],
-            }
+  return (
+    <div className="container">
+      <h2>{countryname}</h2>
+      <section className="details-section">
+        {countries.map((country) => {
+          if (country.name.common === countryname) {
+            const countryCode = country.cca2.toLowerCase();
+            return (
+              <img
+                key={countryCode}
+                src={`${countryMap}${countryCode}/vector.svg`}
+                className="country-map"
+                alt="country map"
+              />
+            );
           }
-          />
-          <p className="aqi-detail">
-            AQI(Air Quality Index):
-            {item.main.aqi}
-          </p>
+          return null;
+        })}
+        <div className="data">
+          {weather.map((item) => (
+            <figure key={item.id}>
+              <img src={baseImageUrl + item.icon + imageExtension} alt="weather icon" />
+              <figcaption>{item.description}</figcaption>
+            </figure>
+          ))}
+          {Object.values(airPollution).map((item) => (
+            <div key={item.dt} className="pollution-data">
+
+              <Pie
+                type="pie"
+                data={
+              {
+                labels: ['CO', 'NO', 'NO2', 'O3', 'SO2', 'NH3', 'PM2.5', 'PM10'],
+                datasets: [
+                  {
+                    data: [item.components.co, item.components.no, item.components.no2,
+                      item.components.o3, item.components.so2, item.components.nh3,
+                      item.components.pm2_5, item.components.pm10],
+                    backgroundColor: ['red', 'blue', 'green', 'orange',
+                      'yellow', 'purple', 'pink', 'brown'],
+                  },
+                ],
+              }
+            }
+                options={{
+                  plugins: {
+                    legend: {
+                      display: true,
+                      position: 'bottom',
+                    },
+                  },
+                }}
+              />
+              <p className="aqi-detail">
+                AQI(Air Quality Index):
+                {rating(item.main.aqi)}
+              </p>
+            </div>
+          ))}
         </div>
-      ))}
-    </section>
+      </section>
+    </div>
   );
 };
 
