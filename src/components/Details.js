@@ -18,7 +18,6 @@ const Details = () => {
       if (country.name.common === countryname) {
         dispatch(fetchAirData(country.latlng[0], country.latlng[1]));
         dispatch(fetchWeatherData(country.latlng[0], country.latlng[1]));
-        console.log(airPollution);
       }
     });
   }, []);
@@ -38,6 +37,48 @@ const Details = () => {
       default:
         return 'not available';
     }
+  };
+
+  const noPollutionData = (data) => {
+    if (!data.length) {
+      return (
+        <div className="pollution-data">
+          <Pie
+            type="pie"
+            data={
+                {
+                  labels: ['N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
+                  datasets: [
+                    {
+                      data: [12, 12, 12, 12, 12, 12, 12, 12],
+                      backgroundColor: ['red', 'blue', 'green', 'orange',
+                        'yellow', 'purple', 'pink', 'brown'],
+                    },
+                  ],
+                }
+              }
+            options={{
+              plugins: {
+                legend: {
+                  display: true,
+                  position: 'bottom',
+                  labels: {
+                    color: '#fff',
+                    fontSize: 18,
+                  },
+                },
+                title: {
+                  display: true,
+                  text: 'data not available on the server',
+                  color: '#fff',
+                },
+              },
+            }}
+          />
+        </div>
+      );
+    }
+    return null;
   };
 
   return (
@@ -91,6 +132,11 @@ const Details = () => {
                       position: 'bottom',
                     },
                   },
+                  title: {
+                    display: true,
+                    text: 'Air pollution Data',
+                    color: '#fff',
+                  },
                 }}
               />
               <p className="aqi-detail">
@@ -99,6 +145,8 @@ const Details = () => {
               </p>
             </div>
           ))}
+
+          {noPollutionData(airPollution)}
         </div>
       </section>
     </div>
