@@ -7,7 +7,7 @@ ul {
 }
 
 li {
-  padding: 12px;
+  padding-bottom: 12px;
   border-radius: 5px;
   text-align: center;
   background-color: rgba(100, 149, 237, 0.7);
@@ -85,7 +85,7 @@ button {
 }
 
 .container {
-  margin: 0 20vw 2vw 20vw;
+  margin: 0 10vw 2vw 10vw;
   border-radius: 8px;
   background: #6495ed;
 }
@@ -103,9 +103,49 @@ button {
 }
 
 .details-section > .country-map {
-  width: 30vw;
+  width: 35%;
+  margin-left: 8px;
+}
+
+.data {
+  padding-bottom: 16px;
+}
+
+.data > figure {
+  margin: auto;
 }
 
 .pollution-data {
-  width: 30vw;
+  width: 35vw;
+}
+
+@media screen and (max-width: 768px) {
+  ul {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  li:nth-child(odd) {
+    background-color: rgb(100, 149, 237);
+  }
+
+  li:nth-child(4n+1) {
+    background-color: rgba(64, 126, 240, 0.5);
+  }
+
+  li:nth-child(4n+4) {
+    background-color: rgba(64, 126, 240, 0.5);
+  }
+
+  .container {
+    min-height: 80vh;
+    margin: 0 12px;
+  }
+
+  .details-section {
+    justify-content: center;
+  }
+
+  .pollution-data {
+    width: 60vw;
+  }
 }
