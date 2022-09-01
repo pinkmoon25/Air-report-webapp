@@ -26,7 +26,6 @@ const fetchAirData = (lat, lon) => async (dispatch) => {
     const url = encodeURI(`${airPollutionUrl}lat=${lat}&lon=${lon}&appid=${appId}`);
     const res = await fetch(url);
     const data = await res.json();
-    console.log(data);
     dispatch({ type: FETCH_AIR_REPORT, payload: data.list });
   } catch (error) {
     console.error(error);
