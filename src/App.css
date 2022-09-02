@@ -1,0 +1,233 @@
+ul {
+  margin: 16px 0;
+  padding: 0;
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+li {
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  background-color: rgba(100, 149, 237, 0.7);
+}
+
+li:nth-child(odd) {
+  background-color: rgba(64, 126, 240, 0.5);
+}
+
+a {
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  transition: all 0.25s ease-in;
+}
+
+a:hover {
+  transform: scale(1.1);
+}
+
+header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.icons {
+  display: flex;
+  gap: 28px;
+  font-size: 18px;
+}
+
+section.homepage {
+  padding: 0 6vw;
+}
+
+.select-region {
+  padding-bottom: 16px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.continent {
+  padding: 16px 8px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 8px;
+  background-color: rgb(100, 149, 237);
+}
+
+.map-img {
+  width: 35vw;
+}
+
+.flags-img {
+  width: 12%;
+}
+
+.country-map {
+  width: 50%;
+}
+
+.country-flag {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.country-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.country-details > * {
+  margin: 0;
+  word-wrap: break-word;
+}
+
+.container {
+  margin: 0 10vw 2vw 10vw;
+  border-radius: 8px;
+  text-align: center;
+  background: #6495ed;
+}
+
+.container > h2 {
+  margin: 0;
+  padding-top: 12px;
+  text-align: center;
+}
+
+.details-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.details-link {
+  font-size: 1.5em;
+}
+
+.data {
+  padding-bottom: 16px;
+}
+
+.data > figure {
+  margin: auto;
+  width: 110px;
+}
+
+.pollution-data {
+  width: 35vw;
+}
+
+.aqi-detail {
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+.aqi-detail > span {
+  font-size: 1.3em;
+  font-weight: 700;
+}
+
+.component-gases {
+  width: 70%;
+  padding: 8px;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.component-gases > li {
+  background-color: #0754e4;
+}
+
+@media screen and (max-width: 768px) {
+  ul {
+    grid-template-columns: 52% 52%;
+    place-content: center;
+  }
+
+  li:nth-child(odd) {
+    background-color: rgb(100, 149, 237);
+  }
+
+  li:nth-child(4n+1) {
+    background-color: rgba(64, 126, 240, 0.5);
+  }
+
+  li:nth-child(4n+4) {
+    background-color: rgba(64, 126, 240, 0.5);
+  }
+
+  .icons {
+    gap: 0;
+    font-size: initial;
+  }
+
+  h1 {
+    font-size: 1.5em;
+  }
+
+  .continent > h2 {
+    font-size: 1.2em;
+  }
+
+  .header-link {
+    font-size: 14px;
+  }
+
+  .details-link {
+    font-size: 1.2em;
+  }
+
+  .country-details > * {
+    font-size: 12px;
+  }
+
+  .container {
+    margin: 0 12px;
+  }
+
+  .details-section {
+    width: fit-content;
+    justify-content: center;
+  }
+
+  .pollution-data {
+    width: 60vw;
+  }
+
+  .component-gases {
+    width: auto;
+    padding: 4px;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .component-gases > li {
+    padding: 4px;
+    text-align: start;
+    background-color: #0754e4;
+  }
+
+  .aqi-detail {
+    font-size: 1em;
+  }
+
+  .aqi-detail > span {
+    font-size: 1.1em;
+  }
+}
