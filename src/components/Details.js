@@ -25,60 +25,105 @@ const Details = () => {
   const rating = (n) => {
     switch (n) {
       case 1:
-        return (<span>Good</span>);
+        return (<span style={{ color: '#008000' }}>Good</span>);
       case 2:
-        return (<span>Fair</span>);
+        return (<span style={{ color: '#ffff00' }}>Fair</span>);
       case 3:
-        return (<span>Moderate</span>);
+        return (<span style={{ color: '#ffa500' }}>Moderate</span>);
       case 4:
-        return (<span>Poor</span>);
+        return (<span style={{ color: '#ff0000' }}>Poor</span>);
       case 5:
-        return (<span>Very Poor</span>);
+        return (<span style={{ color: '#ff0000' }}>Very Poor</span>);
       default:
         return 'not available';
     }
   };
 
-  const noPollutionData = (data) => {
-    if (!data.length) {
+  const renderPollutionData = (data) => {
+    if (data.length) {
       return (
-        <div className="pollution-data">
-          <Pie
-            type="pie"
-            data={
-                {
-                  labels: ['N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
-                  datasets: [
-                    {
-                      data: [12, 12, 12, 12, 12, 12, 12, 12],
-                      backgroundColor: ['red', 'blue', 'green', 'orange',
-                        'yellow', 'purple', 'pink', 'brown'],
+        Object.values(airPollution).map((item) => (
+          <div key={item.dt} className="pollution-data">
+
+            <Pie
+              type="pie"
+              data={
+        {
+          labels: ['CO', 'NO', 'NO2', 'O3', 'SO2', 'NH3', 'PM2.5', 'PM10'],
+          datasets: [
+            {
+              data: [item.components.co, item.components.no, item.components.no2,
+                item.components.o3, item.components.so2, item.components.nh3,
+                item.components.pm2_5, item.components.pm10],
+              backgroundColor: ['red', 'blue', 'green', 'orange',
+                'yellow', 'purple', 'pink', 'brown'],
+            },
+          ],
+        }
+        }
+              options={{
+                plugins: {
+                  legend: {
+                    display: true,
+                    position: 'bottom',
+                    labels: {
+                      color: '#fff',
+                      fontSize: 18,
+                      fontWeight: 700,
                     },
-                  ],
-                }
-              }
-            options={{
-              plugins: {
-                legend: {
-                  display: true,
-                  position: 'bottom',
-                  labels: {
+                  },
+                  title: {
+                    display: true,
+                    text: 'Air pollution Data',
                     color: '#fff',
-                    fontSize: 18,
                   },
                 },
-                title: {
-                  display: true,
-                  text: 'data not available on the server',
-                  color: '#fff',
-                },
-              },
-            }}
-          />
-        </div>
+              }}
+            />
+            <p className="aqi-detail">
+              AQI(Air Quality Index):&nbsp;
+              {rating(item.main.aqi)}
+            </p>
+          </div>
+        ))
       );
     }
-    return null;
+    return (
+      <div className="pollution-data">
+        <Pie
+          type="pie"
+          data={
+      {
+        labels: ['N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
+        datasets: [
+          {
+            data: [12, 12, 12, 12, 12, 12, 12, 12],
+            backgroundColor: ['red', 'blue', 'green', 'orange',
+              'yellow', 'purple', 'pink', 'brown'],
+          },
+        ],
+      }
+      }
+          options={{
+            plugins: {
+              legend: {
+                display: true,
+                position: 'bottom',
+                labels: {
+                  color: '#fff',
+                  fontSize: 18,
+                },
+              },
+              title: {
+                display: true,
+                text: 'loading data from the server...',
+                color: '#fff',
+              },
+            },
+          }}
+        />
+      </div>
+    );
   };
 
   return (
@@ -106,47 +151,7 @@ const Details = () => {
               <figcaption>{item.description}</figcaption>
             </figure>
           ))}
-          {Object.values(airPollution).map((item) => (
-            <div key={item.dt} className="pollution-data">
-
-              <Pie
-                type="pie"
-                data={
-              {
-                labels: ['CO', 'NO', 'NO2', 'O3', 'SO2', 'NH3', 'PM2.5', 'PM10'],
-                datasets: [
-                  {
-                    data: [item.components.co, item.components.no, item.components.no2,
-                      item.components.o3, item.components.so2, item.components.nh3,
-                      item.components.pm2_5, item.components.pm10],
-                    backgroundColor: ['red', 'blue', 'green', 'orange',
-                      'yellow', 'purple', 'pink', 'brown'],
-                  },
-                ],
-              }
-            }
-                options={{
-                  plugins: {
-                    legend: {
-                      display: true,
-                      position: 'bottom',
-                    },
-                  },
-                  title: {
-                    display: true,
-                    text: 'Air pollution Data',
-                    color: '#fff',
-                  },
-                }}
-              />
-              <p className="aqi-detail">
-                AQI(Air Quality Index):
-                {rating(item.main.aqi)}
-              </p>
-            </div>
-          ))}
-
-          {noPollutionData(airPollution)}
+          {renderPollutionData(airPollution)}
         </div>
       </section>
     </div>
