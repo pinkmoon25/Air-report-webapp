@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchCountries } from '../redux/action-reducer';
 import { countryMap } from '../api/api';
+import Modal from './Modal';
 import asiaMap from '../images/asia.png';
 import africMap from '../images/africa.svg';
 import antarcticMap from '../images/antarctica.svg';
@@ -91,6 +92,7 @@ const Homepage = () => {
           <option value="Oceania">Oceania</option>
         </select>
       </div>
+      <Modal />
       <div className="continent">
         <h2>
           {countries[0]?.continents[0] || ''}
