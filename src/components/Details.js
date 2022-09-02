@@ -25,7 +25,7 @@ const Details = () => {
   const rating = (n) => {
     switch (n) {
       case 1:
-        return (<span style={{ color: '#008000' }}>Good</span>);
+        return (<span style={{ color: '#7cfc00' }}>Good</span>);
       case 2:
         return (<span style={{ color: '#ffff00' }}>Fair</span>);
       case 3:
