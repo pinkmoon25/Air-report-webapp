@@ -43,7 +43,9 @@ const Homepage = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchCountries(region));
+    if (!countries.length) {
+      dispatch(fetchCountries(region));
+    }
   }, []);
 
   const renderCountries = () => (
@@ -60,11 +62,11 @@ const Homepage = () => {
             alt="country map"
           />
           <p>
-            Capital:
+            Capital:&nbsp;
             {country.capital}
           </p>
           <p>
-            Population:
+            Population:&nbsp;
             {country.population}
           </p>
           <Link to={`/details/${country.name.common}`}>
@@ -91,7 +93,7 @@ const Homepage = () => {
       </div>
       <div className="continent">
         <h2>
-          {region}
+          {countries[0]?.continents[0] || ''}
           (
           {countries.length}
           {' '}
