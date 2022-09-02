@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Air-report-webapp/static/css/main.a9b3d14b.css",
-    "main.js": "/Air-report-webapp/static/js/main.7f6dd3c7.js",
+    "main.js": "/Air-report-webapp/static/js/main.c9272348.js",
     "static/media/asia.png": "/Air-report-webapp/static/media/asia.e2a3c589a3ffdc239d77.png",
     "static/media/europe.svg": "/Air-report-webapp/static/media/europe.99b5e24077e1085c4a55a8b49a5c1dc6.svg",
     "static/media/oceania.svg": "/Air-report-webapp/static/media/oceania.757530516ed89894f3c865f2834d917d.svg",
@@ -11,10 +11,10 @@
     "static/media/antarctica.svg": "/Air-report-webapp/static/media/antarctica.1b79eac0e59f29b950010fa81bfe5c1e.svg",
     "index.html": "/Air-report-webapp/index.html",
     "main.a9b3d14b.css.map": "/Air-report-webapp/static/css/main.a9b3d14b.css.map",
-    "main.7f6dd3c7.js.map": "/Air-report-webapp/static/js/main.7f6dd3c7.js.map"
+    "main.c9272348.js.map": "/Air-report-webapp/static/js/main.c9272348.js.map"
   },
   "entrypoints": [
     "static/css/main.a9b3d14b.css",
-    "static/js/main.7f6dd3c7.js"
+    "static/js/main.c9272348.js"
   ]
 }
