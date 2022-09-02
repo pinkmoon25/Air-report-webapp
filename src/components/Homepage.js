@@ -22,8 +22,8 @@ const Homepage = () => {
     dispatch(fetchCountries(e.target.value));
   };
 
-  const continentMap = () => {
-    switch (region) {
+  const continentMap = (continent) => {
+    switch (continent) {
       case 'Asia':
         return (<img src={asiaMap} alt="asia map" className="map-img" />);
       case 'Europe':
@@ -102,7 +102,7 @@ const Homepage = () => {
           {' '}
           countries)
         </h2>
-        {continentMap()}
+        {continentMap(countries[0]?.continents[0])}
       </div>
       {renderCountries()}
     </section>
