@@ -194,10 +194,10 @@ section.homepage {
     flex-direction: column;
   }
 
-.data {
-  order: 1;
-  display: flex;
-}
+  .data {
+    order: 1;
+    display: flex;
+  }
 
   .pollution-data {
     width: 75vw;
