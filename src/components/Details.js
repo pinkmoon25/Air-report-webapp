@@ -130,51 +130,61 @@ const Details = () => {
     <div className="container">
       <h2>{countryname}</h2>
       <section className="details-section">
-        {Object.values(airPollution).map((item) => (
-          <div className="component-gases" key={item.dt}>
-            <li>
-              Carbon monoxide:
-              {item.components.co}
-            </li>
-            <li>
-              Nitrogen monoxide:
-              {item.components.no}
-            </li>
-            <li>
-              Nitrogen dioxide:
-              {item.components.no2}
-            </li>
-            <li>
-              Ozone:
-              {item.components.o3}
-            </li>
-            <li>
-              Sulphur dioxide:
-              {item.components.so2}
-            </li>
-            <li>
-              Ammonia:
-              {item.components.nh3}
-            </li>
-            <li>
-              PM10:
-              {item.components.pm10}
-            </li>
-            <li>
-              PM2.5:
-              {item.components.pm2_5}
-            </li>
-          </div>
-        ))}
         <div className="data">
-          {weather.map((item) => (
+          {weather.weather?.map((item) => (
             <figure key={item.id}>
               <img src={baseImageUrl + item.icon + imageExtension} alt="weather icon" />
               <figcaption>{item.description}</figcaption>
             </figure>
           ))}
-          {renderPollutionData(airPollution)}
+          <ul className="weather-data">
+            <li>
+              Temperature:
+              {' '}
+              {weather.main?.temp}
+              &#8451;
+            </li>
+            <li>
+              Feels Like:
+              {' '}
+              {weather.main?.feels_like}
+              &#8451;
+            </li>
+            <li>
+              Atmospheric pressure:
+              {' '}
+              {weather.main?.pressure}
+              {' '}
+              hPa
+            </li>
+            <li>
+              Humidity:
+              {' '}
+              {weather.main?.humidity}
+              &#65285;
+            </li>
+            <li>
+              Minimum temperature:
+              {' '}
+              {weather.main?.temp_min}
+              &#8451;
+            </li>
+            <li>
+              Maximum temperature:
+              {' '}
+              {weather.main?.temp_max}
+              &#8451;
+            </li>
+            <li>
+              Wind speed:
+              {' '}
+              {weather.wind?.speed}
+              {' '}
+              meter/sec
+            </li>
+          </ul>
         </div>
+        {renderPollutionData(airPollution)}
       </section>
     </div>
   );
