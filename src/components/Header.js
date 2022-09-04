@@ -3,7 +3,7 @@ import { FaArrowLeft, FaMicrophone, FaWhmcs } from 'react-icons/fa';
 
 const Header = () => (
   <header>
-    <Link to="/">
+    <Link to="/" className="header-link">
       {' '}
       <FaArrowLeft />
 &nbsp;2022

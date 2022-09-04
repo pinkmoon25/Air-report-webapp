@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { FaArrowCircleRight } from 'react-icons/fa';
 import { fetchCountries } from '../redux/action-reducer';
 import { countryMap } from '../api/api';
 import Modal from './Modal';
@@ -22,8 +23,8 @@ const Homepage = () => {
     dispatch(fetchCountries(e.target.value));
   };
 
-  const continentMap = () => {
-    switch (region) {
+  const continentMap = (continent) => {
+    switch (continent) {
       case 'Asia':
         return (<img src={asiaMap} alt="asia map" className="map-img" />);
       case 'Europe':
@@ -53,26 +54,28 @@ const Homepage = () => {
     <ul>
       {countries.map((country) => (
         <li key={country.ccn3} className="country">
-          <div className="country-name">
-            <h3>{country.name.common}</h3>
+          <div className="country-flag">
             <img src={country.flags.svg} className="flags-img" alt="country flag" />
+            <Link to={`/details/${country.name.common}`} className="details-link">
+              <FaArrowCircleRight />
+            </Link>
           </div>
           <img
             src={`${countryMap}${country.cca2.toLowerCase()}/vector.svg`}
             className="country-map"
             alt="country map"
           />
-          <p>
-            Capital:&nbsp;
-            {country.capital}
-          </p>
-          <p>
-            Population:&nbsp;
-            {country.population}
-          </p>
-          <Link to={`/details/${country.name.common}`}>
-            <button type="button">Air report</button>
-          </Link>
+          <div className="country-details">
+            <h3>{country.name.common}</h3>
+            <p>
+              Capital:&nbsp;
+              {country.capital}
+            </p>
+            <p>
+              Population:&nbsp;
+              {country.population}
+            </p>
+          </div>
         </li>
       ))}
     </ul>
@@ -101,7 +104,7 @@ const Homepage = () => {
           {' '}
           countries)
         </h2>
-        {continentMap()}
+        {continentMap(countries[0]?.continents[0])}
       </div>
       {renderCountries()}
     </section>

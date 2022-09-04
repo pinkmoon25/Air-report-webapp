@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto'; //eslint-disable-line
 import { fetchAirData, fetchWeatherData } from '../redux/action-reducer';
-import { baseImageUrl, imageExtension, countryMap } from '../api/api';
+import { baseImageUrl, imageExtension } from '../api/api';
 
 const Details = () => {
   const countries = useSelector((state) => state.countries);
@@ -25,7 +25,7 @@ const Details = () => {
   const rating = (n) => {
     switch (n) {
       case 1:
-        return (<span style={{ color: '#008000' }}>Good</span>);
+        return (<span style={{ color: '#7cfc00' }}>Good</span>);
       case 2:
         return (<span style={{ color: '#ffff00' }}>Fair</span>);
       case 3:
@@ -130,20 +130,42 @@ const Details = () => {
     <div className="container">
       <h2>{countryname}</h2>
       <section className="details-section">
-        {countries.map((country) => {
-          if (country.name.common === countryname) {
-            const countryCode = country.cca2.toLowerCase();
-            return (
-              <img
-                key={countryCode}
-                src={`${countryMap}${countryCode}/vector.svg`}
-                className="country-map"
-                alt="country map"
-              />
-            );
-          }
-          return null;
-        })}
+        {Object.values(airPollution).map((item) => (
+          <div className="component-gases" key={item.dt}>
+            <li>
+              Carbon monoxide:
+              {item.components.co}
+            </li>
+            <li>
+              Nitrogen monoxide:
+              {item.components.no}
+            </li>
+            <li>
+              Nitrogen dioxide:
+              {item.components.no2}
+            </li>
+            <li>
+              Ozone:
+              {item.components.o3}
+            </li>
+            <li>
+              Sulphur dioxide:
+              {item.components.so2}
+            </li>
+            <li>
+              Ammonia:
+              {item.components.nh3}
+            </li>
+            <li>
+              PM10:
+              {item.components.pm10}
+            </li>
+            <li>
+              PM2.5:
+              {item.components.pm2_5}
+            </li>
+          </div>
+        ))}
         <div className="data">
           {weather.map((item) => (
             <figure key={item.id}>
