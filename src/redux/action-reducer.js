@@ -34,10 +34,11 @@ const fetchAirData = (lat, lon) => async (dispatch) => {
 
 const fetchWeatherData = (lat, lon) => async (dispatch) => {
   try {
-    const url = encodeURI(`${weatherUrl}lat=${lat}&lon=${lon}&appid=${appId}`);
+    const url = encodeURI(`${weatherUrl}lat=${lat}&lon=${lon}&appid=${appId}&units=metric`);
     const res = await fetch(url);
     const data = await res.json();
-    dispatch({ type: FETCH_WEATHER_REPORT, payload: data.weather });
+    console.log(data);
+    dispatch({ type: FETCH_WEATHER_REPORT, payload: data });
   } catch (error) {
     console.error(error);
   }
