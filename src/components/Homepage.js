@@ -51,7 +51,7 @@ const Homepage = () => {
   }, []);
 
   const renderCountries = () => (
-    <ul>
+    <ul className="country-list">
       {countries.map((country) => (
         <li key={country.ccn3} className="country">
           <div className="country-flag">
