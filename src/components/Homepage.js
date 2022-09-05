@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { FaArrowCircleRight } from 'react-icons/fa';
 import { fetchCountries } from '../redux/action-reducer';
 import { countryMap } from '../api/api';
+import Modal from './Modal';
 import asiaMap from '../images/asia.png';
 import africMap from '../images/africa.svg';
 import antarcticMap from '../images/antarctica.svg';
@@ -50,7 +51,7 @@ const Homepage = () => {
   }, []);
 
   const renderCountries = () => (
-    <ul>
+    <ul className="country-list">
       {countries.map((country) => (
         <li key={country.ccn3} className="country">
           <div className="country-flag">
@@ -94,6 +95,7 @@ const Homepage = () => {
           <option value="Oceania">Oceania</option>
         </select>
       </div>
+      <Modal />
       <div className="continent">
         <h2>
           {countries[0]?.continents[0] || ''}

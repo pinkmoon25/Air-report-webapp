@@ -2,6 +2,12 @@ ul {
   margin: 16px 0;
   padding: 0;
   list-style-type: none;
+}
+
+.country-list {
+  margin: 16px 0;
+  padding: 0;
+  list-style-type: none;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
@@ -113,12 +119,8 @@ section.homepage {
   font-size: 1.5em;
 }
 
-.data {
-  padding-bottom: 16px;
-}
-
 .data > figure {
-  margin: auto;
+  margin: 0;
   width: 110px;
 }
 
@@ -136,23 +138,53 @@ section.homepage {
   font-weight: 700;
 }
 
-.component-gases {
-  width: 70%;
-  padding: 8px;
-  list-style-type: none;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.component-gases > li {
+.weather-data > li {
+  text-align: start;
   background-color: #0754e4;
 }
 
+.modal-data-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+}
+
+.modal-title {
+  margin: 0;
+  padding-top: 8px;
+  text-align: center;
+}
+
+.modal-btn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal-btn > button {
+  background: transparent;
+  border: none;
+  font-size: 2em;
+  color: #ff6347;
+}
+
+.modal-open-btn {
+  display: flex;
+  justify-content: center;
+}
+
+.current-location-btn {
+  margin-bottom: 12px;
+  padding: 5px 8px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1em;
+  font-weight: 600;
+  background-color: #ff4500;
+}
+
 @media screen and (max-width: 768px) {
-  ul {
+  .country-list {
     grid-template-columns: 52% 52%;
     place-content: center;
   }
@@ -199,26 +231,20 @@ section.homepage {
   }
 
   .details-section {
-    width: fit-content;
-    justify-content: center;
+    flex-direction: column;
+  }
+
+  .data {
+    order: 1;
+    display: flex;
   }
 
   .pollution-data {
-    width: 60vw;
+    width: 75vw;
   }
 
-  .component-gases {
-    width: auto;
-    padding: 4px;
-    list-style-type: none;
-    display: flex;
-    flex-direction: column;
-    font-size: 12px;
-    font-weight: 600;
-  }
-
-  .component-gases > li {
-    padding: 4px;
+  .weather-data > li {
+    padding: 5px 8px;
     text-align: start;
     background-color: #0754e4;
   }
@@ -229,5 +255,13 @@ section.homepage {
 
   .aqi-detail > span {
     font-size: 1.1em;
+  }
+
+  .modal-data-section {
+    flex-direction: column;
+  }
+
+  .current-location-btn {
+    font-size: 0.8em;
   }
 }

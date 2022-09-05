@@ -1,26 +1,29 @@
-import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import ReactModal from 'react-modal';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Pie } from 'react-chartjs-2';
+import { CgCloseO } from 'react-icons/cg';
 import { Chart as ChartJS } from 'chart.js/auto'; //eslint-disable-line
 import { fetchAirData, fetchWeatherData } from '../redux/action-reducer';
 import { baseImageUrl, imageExtension } from '../api/api';
 
-const Details = () => {
-  const countries = useSelector((state) => state.countries);
-  const airPollution = useSelector((state) => state.air);
-  const weather = useSelector((state) => state.weather);
+const Modal = () => {
+  const [open, setIsOpen] = useState(false);
+  const airPollution = useSelector(((state) => state.air));
+  const weather = useSelector(((state) => state.weather));
   const dispatch = useDispatch();
-  const { countryname } = useParams();
 
-  useEffect(() => {
-    countries.forEach((country) => {
-      if (country.name.common === countryname) {
-        dispatch(fetchAirData(country.latlng[0], country.latlng[1]));
-        dispatch(fetchWeatherData(country.latlng[0], country.latlng[1]));
-      }
-    });
-  }, []);
+  const handleClick = () => {
+    setIsOpen(true);
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const { latitude } = position.coords;
+        const { longitude } = position.coords;
+        dispatch(fetchAirData(latitude, longitude));
+        dispatch(fetchWeatherData(latitude, longitude));
+      });
+    } else console.log('location access failed');
+  };
 
   const rating = (n) => {
     switch (n) {
@@ -44,7 +47,6 @@ const Details = () => {
       return (
         Object.values(airPollution).map((item) => (
           <div key={item.dt} className="pollution-data">
-
             <Pie
               type="pie"
               data={
@@ -127,67 +129,78 @@ const Details = () => {
   };
 
   return (
-    <div className="container">
-      <h2>{countryname}</h2>
-      <section className="details-section">
-        <div className="data">
-          {weather.weather?.map((item) => (
-            <figure key={item.id}>
-              <img src={baseImageUrl + item.icon + imageExtension} alt="weather icon" />
-              <figcaption>{item.description}</figcaption>
-            </figure>
-          ))}
-          <ul className="weather-data">
-            <li>
-              Temperature:
-              {' '}
-              {weather.main?.temp}
-              &#8451;
-            </li>
-            <li>
-              Feels Like:
-              {' '}
-              {weather.main?.feels_like}
-              &#8451;
-            </li>
-            <li>
-              Atmospheric pressure:
-              {' '}
-              {weather.main?.pressure}
-              {' '}
-              hPa
-            </li>
-            <li>
-              Humidity:
-              {' '}
-              {weather.main?.humidity}
-              &#65285;
-            </li>
-            <li>
-              Minimum temperature:
-              {' '}
-              {weather.main?.temp_min}
-              &#8451;
-            </li>
-            <li>
-              Maximum temperature:
-              {' '}
-              {weather.main?.temp_max}
-              &#8451;
-            </li>
-            <li>
-              Wind speed:
-              {' '}
-              {weather.wind?.speed}
-              {' '}
-              meter/sec
-            </li>
-          </ul>
+    <div>
+      <div className="modal-open-btn">
+        <button type="button" onClick={() => handleClick()} className="current-location-btn">
+          current location data
+        </button>
+      </div>
+      <ReactModal isOpen={open} appElement={document.getElementById('root') || undefined}>
+        <div className="modal-btn">
+          <button type="button" onClick={() => setIsOpen(false)} aria-label="close-modal"><CgCloseO /></button>
         </div>
-        {renderPollutionData(airPollution)}
-      </section>
+        <h2 className="modal-title">{weather.name ? weather.name : ''}</h2>
+        <section className="modal-data-section">
+          <div className="data">
+            {weather.weather?.map((item) => (
+              <figure key={item.id}>
+                <img src={baseImageUrl + item.icon + imageExtension} alt="weather icon" />
+                <figcaption>{item.description}</figcaption>
+              </figure>
+            ))}
+            <ul className="weather-data">
+              <li>
+                Temperature:
+                {' '}
+                {weather.main?.temp}
+                &#8451;
+              </li>
+              <li>
+                Feels Like:
+                {' '}
+                {weather.main?.feels_like}
+                &#8451;
+              </li>
+              <li>
+                Atmospheric pressure:
+                {' '}
+                {weather.main?.pressure}
+                {' '}
+                hPa
+              </li>
+              <li>
+                Humidity:
+                {' '}
+                {weather.main?.humidity}
+                &#65285;
+              </li>
+              <li>
+                Minimum temperature:
+                {' '}
+                {weather.main?.temp_min}
+                &#8451;
+              </li>
+              <li>
+                Maximum temperature:
+                {' '}
+                {weather.main?.temp_max}
+                &#8451;
+              </li>
+              <li>
+                Wind speed:
+                {' '}
+                {weather.wind?.speed}
+                {' '}
+                meter/sec
+              </li>
+            </ul>
+          </div>
+          {renderPollutionData(airPollution)}
+        </section>
+      </ReactModal>
     </div>
+
   );
 };
 
-export default Details;
+export default Modal;
