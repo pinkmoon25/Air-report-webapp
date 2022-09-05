@@ -1,6 +1,6 @@
 # Air-report-webapp
 
-A webApp to get Air pollution data and weather data for countries all around the world.
+A web app to get Air pollution data and weather data for your current location and also for countries all around the world.
 
 ## Built With
 
