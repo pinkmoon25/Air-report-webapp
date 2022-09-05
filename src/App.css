@@ -180,7 +180,12 @@ section.homepage {
   border-radius: 4px;
   font-size: 1em;
   font-weight: 600;
+  color: #fff;
   background-color: #ff4500;
+}
+
+.ReactModal__Content {
+  background: #6495ed !important;
 }
 
 @media screen and (max-width: 768px) {
