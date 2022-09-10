@@ -131,8 +131,9 @@ const Modal = () => {
   return (
     <div>
       <div className="modal-open-btn">
+        <p>get current location data &#8250; </p>
         <button type="button" onClick={() => handleClick()} className="current-location-btn">
-          current location data
+          Air report
         </button>
       </div>
       <ReactModal isOpen={open} appElement={document.getElementById('root') || undefined}>

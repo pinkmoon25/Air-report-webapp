@@ -171,6 +171,9 @@ section.homepage {
 .modal-open-btn {
   display: flex;
   justify-content: center;
+  align-items: flex-end;
+  gap: 5px;
+  font-weight: 600;
 }
 
 .current-location-btn {
