@@ -1,22 +1,18 @@
-# Air-report-webapp
+### Air Report Web App 🌍🌫️
 
-A web app to get Air pollution data and weather data for your current location and also for countries all around the world.
+A web application that provides real-time air pollution and weather data for your current location as well as for countries around the world. Stay informed about air quality and weather conditions with a user-friendly interface.
 
-## Built With
+### Features:
+- **Real-Time Data:** Get up-to-date air pollution and weather information for any location.
+- **Global Coverage:** Access data for countries around the world.
+- **Location Detection:** Automatically retrieve data for your current location.
 
-- **Languages**
+### Built With:
+- **Languages:** HTML, CSS, JavaScript
+- **Library/Frameworks:** React, Redux
+- **APIs:** [openWeather](https://openweathermap.org/api),  [country APi](https://restcountries.com/)
 
-  - *HTML*
-  - *CSS*
-  - *JavaScript*
-
-- **Library/Frameworks**
-   - *React*
-   - *Redux*
-
-- **APIs**
-    - [openWeather](https://openweathermap.org/api)
-    - [country APi](https://restcountries.com/)
+---
  
 ## Live Demo Link
 
